@@ -1,3 +1,16 @@
+# GPLv2 + Classpath Exception sources (modifications)
+
+This fork contains modifications to the following OpenJDK-derived source files
+located under:
+`sherlockmidi/src/main/java/cn/sherlock/com/sun/media/sound`
+
+These files are licensed under GPL v2 with the Classpath Exception (see file headers).
+
+Modifications in this fork are provided to satisfy source-availability obligations
+for distributed binaries that include these components.
+
+
+
 # SherlockMidi
 MIDI synthesizer for android (soundfont2 is supported)
 
