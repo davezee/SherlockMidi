@@ -22,7 +22,16 @@
  * CA 95054 USA or visit www.sun.com if you need additional information or
  * have any questions.
  */
+/*
+ * Modifications Copyright (c) 2025 David Zemsky
+ * Changes: Android compatibility fixes and performance adjustments.
+ *
+ * This file remains licensed under GPL v2 with the Classpath Exception.
+ */
+
 package cn.sherlock.com.sun.media.sound;
+
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,6 +53,8 @@ import cn.sherlock.javax.sound.sampled.AudioSystem;
  * @author Karl Helgason
  */
 public class SoftMainMixer {
+
+    private static final String LOGTAG = SoftMainMixer.class.getSimpleName();
 
     // A private class thats contains a ModelChannelMixer and it's private buffers.
     // This becomes necessary when we want to have separate delay buffers for each channel mixer.
@@ -1075,6 +1086,9 @@ public class SoftMainMixer {
     }
 
     public void processMessage(int ch, int cmd, int data1, int data2) {
+
+        // Log.d(LOGTAG, "processMessage = ch:" + ch + " cmd:" + cmd + " data1:" + data1 + " data2:" + data2);
+
         synchronized (synth.control_mutex) {
             activity();
         }

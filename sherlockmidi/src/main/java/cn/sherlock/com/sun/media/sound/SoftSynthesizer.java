@@ -22,8 +22,16 @@
  * CA 95054 USA or visit www.sun.com if you need additional information or
  * have any questions.
  */
+/*
+ * Modifications Copyright (c) 2025 David Zemsky
+ * Changes: Android compatibility fixes and performance adjustments
+ *
+ * This file remains licensed under GPL v2 with the Classpath Exception.
+ */
 
 package cn.sherlock.com.sun.media.sound;
+
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -62,6 +70,9 @@ import cn.sherlock.javax.sound.sampled.SourceDataLine;
  */
 public class SoftSynthesizer implements AudioSynthesizer,
         ReferenceCountingDevice {
+
+    private static final String LOGTAG = SoftSynthesizer.class.getSimpleName();
+    public static final int SOFT_CHANNEL_COUNT = 41;
 
     protected static class WeakAudioStream extends InputStream
     {
@@ -218,7 +229,8 @@ public class SoftSynthesizer implements AudioSynthesizer,
     private String resamplerType = "linear";
     private SoftResampler resampler = new SoftLinearResampler();
 
-    private int number_of_midi_channels = 16;
+    private int number_of_midi_channels = SOFT_CHANNEL_COUNT;
+
     private int maxpoly = 64;
     private long latency = 200000; // 200 msec
     private boolean jitter_correction = false;
@@ -780,7 +792,8 @@ public class SoftSynthesizer implements AudioSynthesizer,
         item.description = "Turn large mode on or off.";
         list.add(item);
 
-        item = new AudioSynthesizerPropertyInfo("midi channels", o?channels.length:16);
+        item = new AudioSynthesizerPropertyInfo("midi channels", o?channels.length:SOFT_CHANNEL_COUNT);
+
         item.description = "Number of midi channels.";
         list.add(item);
 

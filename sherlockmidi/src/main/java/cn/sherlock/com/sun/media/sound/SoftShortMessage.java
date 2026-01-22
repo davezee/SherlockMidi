@@ -22,6 +22,13 @@
  * CA 95054 USA or visit www.sun.com if you need additional information or
  * have any questions.
  */
+/*
+ * Modifications Copyright (c) 2025 David Zemsky
+ * Changes: Android compatibility fixes and performance adjustments
+ *
+ * This file remains licensed under GPL v2 with the Classpath Exception.
+ */
+
 package cn.sherlock.com.sun.media.sound;
 
 import jp.kshoji.javax.sound.midi.InvalidMidiDataException;
@@ -35,6 +42,13 @@ import jp.kshoji.javax.sound.midi.ShortMessage;
 public class SoftShortMessage extends ShortMessage {
 
     int channel = 0;
+
+    public SoftShortMessage() {}
+
+    public SoftShortMessage(int command, int channel, int data1, int data2)
+            throws InvalidMidiDataException {
+        this.setMessage(command, channel, data1, data2);
+    }
 
     public int getChannel() {
         return channel;
